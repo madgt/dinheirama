@@ -13,7 +13,7 @@ export const app = new Elysia()
   .use(
     cors({
       origin: env.CORS_ORIGIN,
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'x-admin-key'],
       credentials: true,
     })
