@@ -102,9 +102,9 @@ export const categoriesRoutes = new Elysia({ prefix: '/categories' })
     }
   )
 
-  //PATCH /categories/:id -> atualiza uma categoria
+  //PATCH /categories/edit/:id -> atualiza uma categoria
   .patch(
-    '/:id',
+    '/edit/:id',
     async ({ params, body, error }) => {
       // monte apenas os campos permitidos
       const patch: Record<string, any> = {};
