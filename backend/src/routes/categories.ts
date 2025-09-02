@@ -12,7 +12,7 @@ export const categoriesRoutes = new Elysia({ prefix: '/categories' })
           `
           id,
           name,
-          category:category_types(name)`
+          categoryType: category_types(id, name)`
         )
         .is('deleted_at', null) // só as não deletadas
         .order('created_at', { ascending: false });
@@ -35,7 +35,7 @@ export const categoriesRoutes = new Elysia({ prefix: '/categories' })
           `
           id,
           name,
-          category:category_types(name)`
+          categoryType: category_types(id, name)`
         )
         .is('deleted_at', null) // só as não deletadas
         .eq('id', params.id)
