@@ -26,7 +26,7 @@ export default function CategoryList() {
     if (!flash) return;
     const t = setTimeout(
       () => navigate('.', { replace: true, state: null }),
-      2500
+      2800
     );
     return () => clearTimeout(t);
   }, [flash, navigate]);
