@@ -16,6 +16,7 @@ export const transactionsRoutes = new Elysia({ prefix: '/transactions' })
           user_id: body.user_id,
           description: body.description,
           amount: body.amount,
+          date: body.date,
           category_id: body.category_id, //
         })
         .select('*') // retorna o registro criado
@@ -29,6 +30,7 @@ export const transactionsRoutes = new Elysia({ prefix: '/transactions' })
         user_id: t.String(t.String('abc79702-0c85-47e8-ad4a-693c54594cc4')), // opcional por enquanto
         description: t.String({ minLength: 1 }),
         amount: t.String({ minLength: 1 }),
+        date: t.String({ minLength: 6 }),
         category_id: t.String(t.String('c54d9e61-b72b-4233-b846-4f51db67c8e7')),
       }),
       detail: { tags: ['Transactions'], summary: 'Create a new transaction' },
@@ -84,7 +86,7 @@ export const transactionsRoutes = new Elysia({ prefix: '/transactions' })
   )
   //PATCH /categories/:id -> atualiza uma categoria
   .patch(
-    '/:id',
+    '/edit/:id',
     async ({ params, body, error }) => {
       // monte apenas os campos permitidos
       const patch: Record<string, any> = {};
@@ -95,6 +97,9 @@ export const transactionsRoutes = new Elysia({ prefix: '/transactions' })
       }
       if (typeof body.category_id === 'string') {
         patch.category_id = body.category_id;
+      }
+      if (typeof body.date === 'string') {
+        patch.date = new Date(body.date);
       }
       // opcional: atualiza o updated_at, se sua tabela tiver
       patch.updated_at = new Date().toISOString();
@@ -123,6 +128,7 @@ export const transactionsRoutes = new Elysia({ prefix: '/transactions' })
         t.Object({
           description: t.String({ minLength: 1 }),
           amount: t.String({ minLength: 1 }),
+          date: t.String({ minLength: 6 }),
           category_id: t.String(
             t.String('c54d9e61-b72b-4233-b846-4f51db67c8e7')
           ),
