@@ -1,58 +1,73 @@
 import { useEffect, useState } from 'react';
 import {
-  getOneCategory,
-  updateCategory,
-  type Category,
-} from '../../data/categoryData';
-import { useParams, useNavigate } from 'react-router-dom';
-import CategoryTypeDropDown from '../categoryTypes/categoryTypeDropDown';
+  getOneTransaction,
+  updateTransaction,
+  type Transaction,
+} from '../../data/transactionData';
 
-export default function CategoryEdit() {
-  const { categoryId } = useParams<{ categoryId: string }>();
+import { useParams, useNavigate } from 'react-router-dom';
+import CategoryDropDown from '../categories/categoryDropDown';
+
+export default function TransactionEdit() {
+  const { transactionId } = useParams<{ transactionId: string }>();
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState<Category>();
-  const [form, setForm] = useState({ title: '', type: '' });
+  const [transaction, setTransaction] = useState<Transaction>();
+  const [form, setForm] = useState({
+    description: '',
+    amount: '',
+    date: '',
+    category: '',
+  });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);
-    if (!categoryId) return;
-    if (categoryId)
-      getOneCategory(categoryId)
-        .then((cat) => {
-          setCategory(cat);
+    if (!transactionId) return;
+    if (transactionId)
+      getOneTransaction(transactionId)
+        .then((t) => {
+          setTransaction(t);
           setForm({
-            title: cat.name,
-            type: cat.categoryType?.id?.toString() || '',
+            description: t.description,
+            amount: t.amount.toString(),
+            date: t.date,
+            category: t.category?.id?.toString() || '',
           });
         })
         .finally(() => setLoading(false));
-  }, [categoryId]);
+  }, [transactionId]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, title: event.target.value });
+    const { name, value } = event.target;
+
+    setForm({ ...form, [name]: value });
   };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setForm({ ...form, type: event.target.value });
+    setForm({ ...form, category: event.target.value });
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!categoryId) return;
+    if (!transactionId) return;
     try {
       setSaving(true);
       setError(null);
-      await updateCategory(categoryId, {
-        name: form.title,
-        type: Number(form.type),
+      await updateTransaction(transactionId, {
+        description: form.description,
+        amount: form.amount,
+        date: form.date,
+        category: form.category.id,
       });
-      navigate('/categories', {
+      navigate('/transactions', {
         state: {
-          flash: { type: 'success', message: 'Category updated successfully!' },
+          flash: {
+            type: 'success',
+            message: 'Transaction updated successfully!',
+          },
         },
         replace: true,
       });
@@ -65,22 +80,57 @@ export default function CategoryEdit() {
 
   return (
     <div className="container mx-auto py-12">
-      <h2 className="text-base/7 font-semibold text-black">Edit Category</h2>
+      <h2 className="text-base/7 font-semibold text-black">Edit Transaction</h2>
       {loading && <p className="mt-1 text-sm/6 text-gray-400">Loading...</p>}
-      {category && (
+      {transaction && (
         <form onSubmit={handleSubmit}>
           <div className=" container mx-auto py-6 space-y-4">
             <div className="nameInput">
               <div className="flex flex-grow space-x-10">
                 <label
-                  htmlFor="categoryName"
+                  htmlFor="Description"
                   className="block text-sm/6 font-medium text-black flex"
                 >
-                  Category Name
+                  Transaction Description
                 </label>
                 <input
+                  name="description"
                   type="text"
-                  value={form.title}
+                  value={form.description}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="amountInput">
+              <div className="flex flex-grow space-x-10">
+                <label
+                  htmlFor="Amount"
+                  className="block text-sm/6 font-medium text-black flex"
+                >
+                  Amount
+                </label>
+                <input
+                  name="amount"
+                  type="text"
+                  value={form.amount}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="dateInput">
+              <div className="flex flex-grow space-x-10">
+                <label
+                  htmlFor="date"
+                  className="block text-sm/6 font-medium text-black flex"
+                >
+                  Date
+                </label>
+                <input
+                  name="date"
+                  type="text"
+                  value={form.date}
                   onChange={handleInputChange}
                   required
                 />
@@ -93,11 +143,11 @@ export default function CategoryEdit() {
                     htmlFor="categoryName"
                     className="block text-sm/6 font-medium text-black flex-1"
                   >
-                    Category{' '}
+                    Category
                   </label>
                 </div>
-                <CategoryTypeDropDown
-                  value={form.type}
+                <CategoryDropDown
+                  value={form.category}
                   onChange={handleSelectChange}
                 />
               </div>
@@ -114,7 +164,7 @@ export default function CategoryEdit() {
           </div>
         </form>
       )}
-      {!category && !loading && (
+      {!transaction && !loading && (
         <p className="text-red-600">Something went worng! No data to edit!</p>
       )}
     </div>

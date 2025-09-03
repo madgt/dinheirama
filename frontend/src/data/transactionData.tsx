@@ -6,6 +6,7 @@ export interface Transaction {
   type: string;
   amount: number;
   category: {
+    id: string;
     name: string;
   };
   date: string;
@@ -33,7 +34,7 @@ export async function getOneTransaction(
 
 export async function updateTransaction(
   transactionId: string,
-  data: { desc: string; amount: number; category: string; date: string }
+  data: { description: string; amount: number; category: string; date: string }
 ) {
   const response = await fetch(
     `${API_URL}/transactions/edit/${transactionId}`,
@@ -43,6 +44,6 @@ export async function updateTransaction(
       body: JSON.stringify(data),
     }
   );
-  console.log(data.desc);
+  console.log(data);
   return response.json;
 }
