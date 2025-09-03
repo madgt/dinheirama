@@ -47,7 +47,8 @@ export const transactionsRoutes = new Elysia({ prefix: '/transactions' })
           id,
           description,
           amount,
-          category:categories(name)`
+          date,
+          category:categories(id,name)`
         )
         .is('deleted_at', null) // só as não deletadas
         .order('created_at', { ascending: false });
@@ -71,7 +72,8 @@ export const transactionsRoutes = new Elysia({ prefix: '/transactions' })
           id,
           description,
           amount,
-          category:categories(name)`
+          date,
+          category:categories(id,name)`
         )
         .is('deleted_at', null) // só as não deletadas
         .eq('id', params.id)
