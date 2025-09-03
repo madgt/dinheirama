@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CategoryList from './components/categories/categoryList.tsx';
 import TransactionsList from './components/transaction/transactionList.tsx';

@@ -32,7 +32,7 @@ export default function CategoryItem({ category }: CategoryItemProps) {
   return (
     <tr>
       <th className="font-mono">{category.name}</th>
-      <th>{category.category.name}</th>
+      <th>{category.categoryType.name}</th>
       <th>
         {' '}
         <button onClick={() => goToEditCategory(category.id)}>Edit</button>

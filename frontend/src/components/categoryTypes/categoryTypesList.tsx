@@ -32,7 +32,10 @@ export default function CategoryTypeList() {
         <tbody>
           {categoryTypes &&
             categoryTypes.map((categoryType) => (
-              <CategoryTypeItem categoryType={categoryType} />
+              <CategoryTypeItem
+                key={categoryType.id}
+                categoryType={categoryType}
+              />
             ))}
           {/* {!categories && <p>No categories found.</p>} */}
         </tbody>

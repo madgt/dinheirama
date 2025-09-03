@@ -3,6 +3,7 @@ import {
   type CategoryType,
   getCategoryTypes,
 } from '../../data/categoryTypeData';
+import DropDown from '../inputs/DropDown';
 
 export default function CategoryTypeDropDown({
   value,
@@ -19,10 +20,13 @@ export default function CategoryTypeDropDown({
 
   return (
     <span>
-      <select name="categoryType" value={value} onChange={onChange}>
+      <select name="categoryType" value={value} onChange={onChange} required>
         {categoryTypes &&
           categoryTypes.map((categoryType) => (
-            <option value={categoryType.id}>{categoryType.name}</option>
+            // <DropDown key={categoryType.id} value={categoryType.name} />
+            <option key={categoryType.id} value={categoryType.id}>
+              {categoryType.name}
+            </option>
           ))}
         <option value="teste">add category type</option>
       </select>

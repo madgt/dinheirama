@@ -87,8 +87,8 @@ export const cateogryTypesRoutes = new Elysia({ prefix: '/category-types' })
       // monte apenas os campos permitidos
       const patch: Record<string, any> = {};
       if (typeof body.name === 'string') patch.name = body.name;
-      if (typeof body.category_id === 'string') {
-        patch.category_id = body.category_id;
+      if (typeof body.id === 'string') {
+        patch.id = body.id;
       }
       // opcional: atualiza o updated_at, se sua tabela tiver
       patch.updated_at = new Date().toISOString();
