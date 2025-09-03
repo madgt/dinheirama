@@ -30,3 +30,19 @@ export async function getOneTransaction(
   const transaction: Transaction = await response.json();
   return transaction;
 }
+
+export async function updateTransaction(
+  transactionId: string,
+  data: { desc: string; amount: number; category: string; date: string }
+) {
+  const response = await fetch(
+    `${API_URL}/transactions/edit/${transactionId}`,
+    {
+      method: 'PATCH',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(data),
+    }
+  );
+  console.log(data.desc);
+  return response.json;
+}
