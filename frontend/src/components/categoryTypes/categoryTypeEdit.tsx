@@ -26,7 +26,7 @@ export default function CategoryTypeEdit() {
           </div>
         </>
       )}
-      {!category && <p>Algo deu Errado!</p>}
+      {!category && <p>Something went wrong!</p>}
     </div>
   );
 }
