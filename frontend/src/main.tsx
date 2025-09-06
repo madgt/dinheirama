@@ -5,8 +5,8 @@ import App from './App.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <div className="container mx-auto">
+    {/* <div className="container mx-auto"> */}
       <App />
-    </div>
+    {/* </div> */}
   </StrictMode>
 );
