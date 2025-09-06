@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Header from '../header/Header';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -18,7 +17,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <div>
         <h3 className="prose lg:prose-xl">
           Controle seus gastos e planeje seu orçamento!

@@ -1,11 +1,11 @@
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import Tooltip from '@mui/material/Tooltip';
+// import Chip from '@mui/material/Chip';
+// import Tooltip from '@mui/material/Tooltip';
 import { PlusCircleIcon } from '@heroicons/react/24/solid';
 
 export default function Header() {
-  const totalAmount = 1234.56;
+  // const totalAmount = 1234.56;
   return (
     <header className="bg-neutral-200">
       <nav className="flex items-center justify-between p-6 lg:px-8">

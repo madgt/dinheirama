@@ -14,18 +14,18 @@ function App() {
       <Routes>
          <Route element={<SimpleContainer />}>
           <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<CategoryList />} />
-        <Route path="/categories/:categoryId" element={<CategoryEdit />} />
-        <Route path="/transactions" element={<TransactionsList />} />
-        <Route
-          path="/transactions/:transactionId"
-          element={<TransactionEdit />}
-        />
-        <Route path="/categoryType" element={<CategoryTypeList />} />
-        <Route
-          path="/categoryType/:categoryTypeId"
-          element={<CategoryTypeEdit />}
-        />
+          <Route path="categories" element={<CategoryList />} />
+          <Route path="categories/:categoryId" element={<CategoryEdit />} />
+          <Route path="transactions" element={<TransactionsList />} />
+          <Route
+            path="transactions/:transactionId"
+            element={<TransactionEdit />}
+          />
+          <Route path="categoryType" element={<CategoryTypeList />} />
+          <Route
+            path="categoryType/:categoryTypeId"
+            element={<CategoryTypeEdit />}
+          />
          </Route>
         
       </Routes>
